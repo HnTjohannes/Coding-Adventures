@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://ca10wgwdp3a5p"]
+
+[ext_resource type="Script" uid="uid://ci2fssniipuan" path="res://scripts/boid.gd" id="1_xur1n"]
+[ext_resource type="PackedScene" uid="uid://cas1abyabb3f1" path="res://scenes/boid_agent.tscn" id="2_rwlh6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xur1n"]
+size = Vector2(6, 6)
+
+[node name="boid" type="Node2D"]
+script = ExtResource("1_xur1n")
+
+[node name="boid-agent" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("2_rwlh6")]
+blackboard = NodePath("@Node@58504")
+actor = NodePath("..")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+scale = Vector2(0.2, 0.2)
+color = Color(0.533333, 1, 0, 1)
+polygon = PackedVector2Array(15, 12, 0, -15, -15, 12)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_xur1n")

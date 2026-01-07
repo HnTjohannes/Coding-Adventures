@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://cas1abyabb3f1"]
+
+[ext_resource type="Script" uid="uid://c06s43blhe07i" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_pw0jf"]
+[ext_resource type="Script" uid="uid://b7x7hdr77cspk" path="res://addons/beehave/nodes/composites/selector.gd" id="2_ltqik"]
+[ext_resource type="Script" uid="uid://carwa571pu6pe" path="res://addons/beehave/nodes/composites/sequence.gd" id="3_usbil"]
+[ext_resource type="Script" uid="uid://bhju0u448rqx" path="res://scripts/condition_leaf.gd" id="4_x4qpa"]
+[ext_resource type="Script" uid="uid://b2lyhrv0kdivm" path="res://scripts/run_away.gd" id="5_kp678"]
+[ext_resource type="Script" uid="uid://dpp5tky7dpoo0" path="res://addons/beehave/nodes/decorators/inverter.gd" id="6_usbil"]
+[ext_resource type="Script" uid="uid://b1vpsajbwx2yx" path="res://scripts/flocking.gd" id="7_x4qpa"]
+
+[node name="boid-agent" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("1_pw0jf")
+blackboard = NodePath("@Node@58465")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://c06s43blhe07i"
+
+[node name="SelectorComposite" type="Node" parent="."]
+script = ExtResource("2_ltqik")
+metadata/_custom_type_script = "uid://b7x7hdr77cspk"
+
+[node name="in_danger" type="Node" parent="SelectorComposite"]
+script = ExtResource("3_usbil")
+metadata/_custom_type_script = "uid://carwa571pu6pe"
+
+[node name="predatorInSight" type="Node" parent="SelectorComposite/in_danger"]
+script = ExtResource("4_x4qpa")
+metadata/_custom_type_script = "uid://df80u6b6x6cbh"
+
+[node name="runAway" type="Node" parent="SelectorComposite/in_danger"]
+script = ExtResource("5_kp678")
+metadata/_custom_type_script = "uid://bgccfoysqgwda"
+
+[node name="no_danger" type="Node" parent="SelectorComposite"]
+script = ExtResource("3_usbil")
+metadata/_custom_type_script = "uid://carwa571pu6pe"
+
+[node name="InverterDecorator" type="Node" parent="SelectorComposite/no_danger"]
+script = ExtResource("6_usbil")
+metadata/_custom_type_script = "uid://dpp5tky7dpoo0"
+
+[node name="predatorInSight2" type="Node" parent="SelectorComposite/no_danger/InverterDecorator"]
+script = ExtResource("4_x4qpa")
+metadata/_custom_type_script = "uid://df80u6b6x6cbh"
+
+[node name="flocking" type="Node" parent="SelectorComposite/no_danger"]
+script = ExtResource("7_x4qpa")
+metadata/_custom_type_script = "uid://bgccfoysqgwda"

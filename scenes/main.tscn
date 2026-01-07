@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://3s2h1scot7tt"]
+
+[ext_resource type="Script" uid="uid://b3gs5gedko6kd" path="res://scripts/main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://5xg6fi8xlsx6" path="res://scenes/predator.tscn" id="2_0xm2m"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_ig7tw")
+num_boids = 65
+
+[node name="boids" type="Node2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="predator" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(233, 171)
